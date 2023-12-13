@@ -6,7 +6,6 @@ class PredictionUrlResource(Resource):
     @classmethod
     def post(cls):
         try:
-            Id = request.form['id']
             url = request.form['url']
 
             prompt = f"""Saya memiliki link url postingan sebagai berikut
@@ -16,7 +15,9 @@ class PredictionUrlResource(Resource):
                       """
             return {
                 'status' : 200,
-                'prediction' : prediction.predict(prompt)
+                'data' : {
+                    'prediction' : prediction.predict(prompt)
+                }
             }
             
         except Exception as error:
